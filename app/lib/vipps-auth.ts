@@ -332,8 +332,8 @@ const VIPPS_CLIENT_ID = process.env.EXPO_PUBLIC_VIPPS_CLIENT_ID!
 // }
 
 // Use the exact URIs as configured in Vipps portal
-const REDIRECT_URI = 'https://auth.kvikk.app/redirect'
-const APP_CALLBACK_URI = 'https://auth.kvikk.app/callback'
+const REDIRECT_URI =  "kvikk://auth"
+const APP_CALLBACK_URI = 'kvikk://auth'
 
 async function base64URLEncode(buffer: ArrayBuffer): Promise<string> {
     return btoa(String.fromCharCode(...new Uint8Array(buffer)))

@@ -1,9 +1,9 @@
 import 'react-native-url-polyfill/auto'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createClient } from '@supabase/supabase-js';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL as string
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY as string
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
@@ -12,36 +12,39 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     persistSession: true,
     detectSessionInUrl: false,
   },
-});
+})
 
+// // Function to create or update user in Supabase
+// export const createOrUpdateUser = async (vippsUserInfo: any) => {
+//   try {
+//     // First, try to sign up the user
+//     const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+//       email: vippsUserInfo.email,
+//       password: crypto.randomUUID(), // Generate a random password
+//       options: {
+//         data: {
+//           name: vippsUserInfo.name,
+//           phone: vippsUserInfo.phoneNumber,
+//           vipps_sub: vippsUserInfo.sub, // Store Vipps user ID
+//         },
+//       },
+//     })
 
-// import { createClient } from '@supabase/supabase-js'
-// import * as SecureStore from 'expo-secure-store'
-// import { Platform } from 'react-native'
+//     if (signUpError && signUpError.message.includes('already registered')) {
+//       // If user exists, sign in instead
+//       const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+//         email: vippsUserInfo.email,
+//         password: '', // You'll need to implement a password recovery flow
+//       })
 
-// // SecureStore is not available on web, so we'll use localStorage
-// const ExpoSecureStoreAdapter = {
-//   getItem: (key: string) => {
-//     return SecureStore.getItemAsync(key)
-//   },
-//   setItem: (key: string, value: string) => {
-//     return SecureStore.setItemAsync(key, value)
-//   },
-//   removeItem: (key: string) => {
-//     return SecureStore.deleteItemAsync(key)
-//   },
+//       if (signInError) throw signInError
+//       return signInData
+//     }
+
+//     if (signUpError) throw signUpError
+//     return signUpData
+//   } catch (error) {
+//     console.error('Error in createOrUpdateUser:', error)
+//     throw error
+//   }
 // }
-
-// const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!
-// const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!
-
-// export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-//   auth: {
-//     storage: Platform.OS === 'web' 
-//       ? localStorage 
-//       : ExpoSecureStoreAdapter,
-//     autoRefreshToken: true,
-//     persistSession: true,
-//     detectSessionInUrl: false,
-//   },
-// })
