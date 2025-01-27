@@ -1,42 +1,51 @@
-import { Link, Redirect, Tabs } from 'expo-router';
-
-import { HeaderButton } from '../../components/HeaderButton';
-import { TabBarIcon } from '../../components/TabBarIcon';
-import { useAuth } from '~/context/AuthProvider';
+import { Tabs } from "expo-router"
+import { Home, PlusCircle, Shield, User } from "lucide-react-native"
 
 export default function TabLayout() {
-
-  // checking to see if the user is authenticated
-  const { isAuthenticated } = useAuth();
-
-  // if (!isAuthenticated) {
-  //   return <Redirect href={'/login'} />;
-  // }
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: 'black',
-      }}>
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: "#1a1a2e",
+          borderTopWidth: 0,
+          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
+        tabBarActiveTintColor: "#ff3b30",
+        tabBarInactiveTintColor: "#ffffff",
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <HeaderButton />
-            </Link>
-          ),
+          title: "Home",
+          tabBarIcon: ({ color }) => <Home size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="file-claim"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "File claim",
+          tabBarIcon: ({ color }) => <PlusCircle size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="my-coverage"
+        options={{
+          title: "My coverage",
+          tabBarIcon: ({ color }) => <Shield size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Account",
+          tabBarIcon: ({ color }) => <User size={24} color={color} />,
         }}
       />
     </Tabs>
-  );
+  )
 }
+

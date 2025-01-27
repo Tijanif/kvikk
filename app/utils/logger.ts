@@ -2,7 +2,7 @@ import { Platform } from "react-native"
 
 const isWeb = Platform.OS === "web"
 
-export const log = (...args: any[]) => {
+ const log = (...args: any[]) => {
   if (__DEV__) {
     console.log(...args)
 
@@ -18,3 +18,5 @@ export const log = (...args: any[]) => {
     }
   }
 }
+
+export { log }

@@ -1,7 +1,7 @@
 import { Session } from '@supabase/supabase-js';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { supabase } from '~/utils/supabase';
+import { supabase } from '~/app/utils/supabase';
 
 const AuthContext = createContext({});
 

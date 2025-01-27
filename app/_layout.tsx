@@ -1,18 +1,28 @@
 import '../global.css';
 
-import { Stack } from 'expo-router';
-import { AuthProvider } from '~/context/AuthProvider';
-
+import { useEffect } from "react"
+import { Slot, useRouter } from "expo-router"
+import { useAuth } from "../app/hooks/useAuth"
 
 export default function RootLayout() {
-  return (
-    <AuthProvider>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </AuthProvider>
-  );
+  const { user, loading } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!loading) {
+      if (user) {
+        router.replace("/(tabs)")
+      } else {
+        router.replace("/(auth)/login")
+      }
+    }
+  }, [user, loading, router]) // Added router to dependencies
+
+  if (loading) {
+    // You might want to show a loading screen here
+    return null
+  }
+
+  return <Slot />
 }
+

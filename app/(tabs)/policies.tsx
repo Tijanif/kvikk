@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, ScrollView, RefreshControl } from "react-native"
-import { supabase } from "../../utils/supabase"
-import { log } from "../../utils/logger"
+import { supabase } from "../utils/supabase"
+import { log } from "../utils/logger"
 
 type Policy = {
     id: string
@@ -64,4 +64,6 @@ export default function PoliciesScreen() {
         </ScrollView>
     )
 }
+
+
 
